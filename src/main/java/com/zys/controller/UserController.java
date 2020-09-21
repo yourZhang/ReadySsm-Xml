@@ -57,4 +57,10 @@ public class UserController {
         throw new MyCustomException("异常了");
     }
 
+    //测试中文乱码
+    @RequestMapping("chinese")
+    @ResponseBody
+    public String chinese(){
+        return "通过";
+    }
 }

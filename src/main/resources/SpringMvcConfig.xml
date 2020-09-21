@@ -20,7 +20,21 @@
     <!-- 自定义异常处理-->
     <bean id="myCustomExceptionResolver" class="com.zys.exception.MyCustomExceptionResolver"/>
     <!--mvc的注解驱动-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <!-- 消息转换器 -->
+        <mvc:message-converters register-defaults="true">
+            <!--解决全局responseBody返回中文乱码-->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
     <!--   静态资源放行  -->
     <mvc:resources mapping="/js/**" location="/js/"/>
     <!-- 拦截器的配置 -->
